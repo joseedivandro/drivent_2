@@ -5,10 +5,10 @@ import bookingService from '@/services/booking-service';
 
 export async function listBooking(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const booking = await bookingService.getbooking(userId);
+  const booking = await bookingService.getBooking(userId);
   return res.status(httpStatus.OK).send({
     id: booking.id,
-    romm: booking.romm,
+    romm: booking.Room,
   });
 }
 
@@ -23,12 +23,12 @@ export async function bookingRoom(req: AuthenticatedRequest, res: Response) {
   });
 }
 
-export async function changeBooking(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+export async function changeBooking(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
   const bookingId = Number(req.params.bookingId);
   if (!bookingId) return res.sendStatus(httpStatus.BAD_REQUEST);
 
-  const { roomId } = req.body as Record<string, number>; // <tipo da chave, tipo do valor>
+  const { roomId } = req.body as Record<string, number>;
   const booking = await bookingService.changeBookingRoomById(userId, roomId);
 
   return res.status(httpStatus.OK).send({

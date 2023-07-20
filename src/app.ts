@@ -16,6 +16,7 @@ import {
   ticketsRouter,
   paymentsRouter,
   hotelsRouter,
+  bookingRouter,
 } from '@/routers';
 
 const app = express();
@@ -30,7 +31,8 @@ app
   .use('/tickets', ticketsRouter)
   .use('/payments', paymentsRouter)
   .use('/hotels', hotelsRouter)
-  .use(handleApplicationErrors);
+  .use(handleApplicationErrors)
+  .use('/booking', bookingRouter);
 
 export function init(): Promise<Express> {
   connectDb();
