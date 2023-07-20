@@ -5,6 +5,7 @@ import enrollmentRepository from '@/repositories/enrollment-repository';
 import roomRepository from '@/repositories/room-repository';
 import ticketsRepository from '@/repositories/tickets-repository';
 import bookingRepository from '@/repositories/booking-repository';
+import { forBiddenError } from '@/errors';
 
 async function checkEnrollmentTicket(userId: number) {
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
@@ -66,8 +67,6 @@ const bookingService = {
   getBooking,
   getHotelBookings,
   changeBookingRoomById,
-  checkEnrollmentTicket,
-  checkValidBooking,
 };
 
 export default bookingService;
