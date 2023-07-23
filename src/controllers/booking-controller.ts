@@ -3,7 +3,7 @@ import httpStatus from 'http-status';
 import { AuthenticatedRequest } from '@/middlewares';
 import bookingService from '@/services/booking-service';
 
-export async function listBooking(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+export async function getAllBooking(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   try {
     const { userId } = req;
     const booking = await bookingService.getBooking(userId);
