@@ -16,7 +16,7 @@ export async function getAllBooking(req: AuthenticatedRequest, res: Response, ne
   }
 }
 
-export async function bookingRoom(req: AuthenticatedRequest, res: Response) {
+export async function PostBooking(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
   const { roomId } = req.body as Record<string, number>;
 

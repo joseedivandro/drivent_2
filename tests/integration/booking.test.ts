@@ -13,7 +13,7 @@ import {
   createRoomWithHotelId,
 } from '../factories';
 import { cleanDb, generateValidToken } from '../helpers';
-import { createBooking } from '../factories/booking-factory';
+import { createBookingTest } from '../factories/booking-factory';
 import app, { init } from '@/app';
 
 beforeAll(async () => {
@@ -65,7 +65,7 @@ describe('GET /booking', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking({
+      const booking = await createBookingTest({
         userId: user.id,
         roomId: room.id,
       });
@@ -147,7 +147,7 @@ describe('POST /booking', () => {
 
       expect(response.status).toEqual(httpStatus.BAD_REQUEST);
     });
-    it("should respond with status 404 with a invalid body - there's not roomId", async () => {
+    it("should respond with status 404 with a invalid body  there's not roomId", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       const enrollment = await createEnrollmentWithAddress(user);
@@ -168,20 +168,20 @@ describe('POST /booking', () => {
 
       expect(response.status).toEqual(httpStatus.NOT_FOUND);
     });
-    it("should respond with status 403 with a invalid body - there's not vacancy", async () => {
+    it("should respond with status 403 with a invalid body  there's not vacancy", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
-      await createBooking({
+      await createBookingTest({
         userId: user.id,
         roomId: room.id,
       });
-      await createBooking({
+      await createBookingTest({
         userId: user.id,
         roomId: room.id,
       });
-      await createBooking({
+      await createBookingTest({
         userId: user.id,
         roomId: room.id,
       });
@@ -254,7 +254,7 @@ describe('PUT /booking', () => {
       const token = await generateValidToken(user);
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
-      const booking = await createBooking({
+      const booking = await createBookingTest({
         roomId: room.id,
         userId: user.id,
       });
@@ -286,7 +286,7 @@ describe('PUT /booking', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking({
+      const booking = await createBookingTest({
         roomId: room.id,
         userId: user.id,
       });
@@ -303,7 +303,7 @@ describe('PUT /booking', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking({
+      const booking = await createBookingTest({
         roomId: room.id,
         userId: user.id,
       });
@@ -317,22 +317,22 @@ describe('PUT /booking', () => {
 
       expect(response.status).toEqual(httpStatus.NOT_FOUND);
     });
-    it("should respond with status 403 with a invalid body - there's not vacancy", async () => {
+    it("should respond with status 403 with a invalid body  there's not vacancy", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
 
       const hotel = await createHotel();
 
       const otherRoom = await createRoomWithHotelId(hotel.id);
-      const booking = await createBooking({
+      const booking = await createBookingTest({
         userId: user.id,
         roomId: otherRoom.id,
       });
-      await createBooking({
+      await createBookingTest({
         userId: user.id,
         roomId: otherRoom.id,
       });
-      await createBooking({
+      await createBookingTest({
         userId: user.id,
         roomId: otherRoom.id,
       });
@@ -351,7 +351,7 @@ describe('PUT /booking', () => {
       const room = await createRoomWithHotelId(hotel.id);
 
       const otherUser = await createUser();
-      const otherUserBooking = await createBooking({
+      const otherUserBooking = await createBookingTest({
         userId: otherUser.id,
         roomId: room.id,
       });
